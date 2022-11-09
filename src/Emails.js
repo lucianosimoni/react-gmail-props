@@ -5,7 +5,7 @@ function Emails(props) {
 
   const getStarredEmails = (emails) => emails.filter((email) => email.starred);
 
-  // emails prop, setEmails
+  // emails, setEmails, hideRead, currentTab
   const toggleStar = (targetEmail) => {
     const updatedEmails = (emails) =>
       emails.map((email) =>
@@ -27,9 +27,9 @@ function Emails(props) {
   // Condition
   let filteredEmails = props.emails;
 
-  if (hideRead) filteredEmails = getReadEmails(filteredEmails);
+  if (props.hideRead) filteredEmails = getReadEmails(filteredEmails);
 
-  if (currentTab === "starred") {
+  if (props.currentTab === "starred") {
     filteredEmails = getStarredEmails(filteredEmails);
   }
   // End of Condition
@@ -38,10 +38,12 @@ function Emails(props) {
     <main className="emails">
       <ul>
         {filteredEmails.map((email, index) => (
+            //props used: email, toggleRead, toggleStar, index
           <Email
             email={email}
             toggleRead={toggleRead}
             toggleStar={toggleStar}
+            index={index}
           />
         ))}
       </ul>
